@@ -66,7 +66,7 @@ void ModeSTARWARS::run()
         // ヨーを左５５度くらい回してまっすぐな進行方向に向ける（starwars開始）
         if (now - init_now >= 2000 && now - init_now < 3000) { 
           // fix target_roll, target_pitch
-          target_roll = 0.0f, target_pitch = 0.0f;      
+          target_roll = 0.0f, target_pitch = -3000.0f;      
           // fix yaw rate
           target_yaw_rate = -5500.0f; 
         }
@@ -82,7 +82,7 @@ void ModeSTARWARS::run()
         // ヨーを右５５度で進行方向をまっすぐにもどす(starwars終了後)
         if (now - init_now >= 7000 && now - init_now < 8000) { 
           // fix target_roll, target_pitch
-          target_roll = 0.0f, target_pitch = 0.0f;      
+          target_roll = 0.0f, target_pitch = -3000.0f;      
           // fix yaw ratemode
           target_yaw_rate = 5500.0f; 
         }
@@ -144,12 +144,12 @@ void ModeSTARWARS::run()
         // gcs().send_text(MAV_SEVERITY_WARNING, "target_climb_rate(%f), taget_yaw_rate(%f)", target_climb_rate, target_yaw_rate);      //100hz位か、コンソール上で激しく出続けるが、これは置いといて
 
         // display every 2 seconds
-        static uint32_t last_time;
-            if (now - last_time > 2000) {
-               last_time = now;
-               gcs().send_text(MAV_SEVERITY_WARNING, "now:%d", now/1000);
-               gcs().send_text(MAV_SEVERITY_WARNING, "Roll(%3.0f),Pitch(%3.0f)", target_roll/100, target_pitch/100);
-            }     
+        // static uint32_t last_time;
+            // if (now - last_time > 2000) {
+               // last_time = now;
+               // gcs().send_text(MAV_SEVERITY_WARNING, "now:%d", now/1000);
+               // gcs().send_text(MAV_SEVERITY_WARNING, "Roll(%3.0f),Pitch(%3.0f)", target_roll/100, target_pitch/100);
+            // }     
 
         motors->set_desired_spool_state(AP_Motors::DesiredSpoolState::THROTTLE_UNLIMITED);
 
